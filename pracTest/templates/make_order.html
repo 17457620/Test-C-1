@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Make Order</title>
+  <style>
+    label {
+      display: inline-block;
+      width: 150px;
+    }
+    .form-container {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Create a New Order</h1>
+  <div class="form-container">
+    <form method="post">
+      {% csrf_token %}
+      <p>
+        <label for="customerID">Customer ID:</label>
+        <input type="text" id="customerID" name="customerID" required>
+      </p>
+      <p>
+        <label for="orderID">Order ID:</label>
+        <input type="text" id="orderID" name="orderID" required>
+      </p>
+      <p>
+        <label for="orderDate">Order Date:</label>
+        <input type="date" id="orderDate" name="orderDate" required>
+      </p>
+      <p>
+        <label for="shipped">Shipped:</label>
+        <select id="shipped" name="shipped" required>
+          <option value="Y">Yes</option>
+          <option value="N">No</option>
+        </select>
+      </p>
+      <p>
+        <label for="shippingDate">Shipping Date:</label>
+        <input type="date" id="shippingDate" name="shippingDate">
+      </p>
+      <p>
+        <label for="staffID">Staff ID:</label>
+        <input type="text" id="staffID" name="staffID" required>
+      </p>
+      <p>
+        <input type="submit" value="Create Order">
+      </p>
+    </form>
+  </div>
+</body>
+</html>

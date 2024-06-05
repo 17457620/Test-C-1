@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order List</title>
+</head>
+<body>
+  <h1>Order List</h1>
+  <div class="order-container">
+    {% for order in orders %}
+      <div class="order">
+        <div><strong>Order ID:</strong> {{ order.orderID }}</div>
+        <div><strong>Order Date:</strong> {{ order.orderDate }}</div>
+        <div><strong>Shipped:</strong> {{ order.get_shipped_display }}</div>
+        <div><strong>Shipping Date:</strong> {{ order.shippingDate }}</div>
+        <div><strong>Staff ID:</strong> {{ order.staffID }}</div>
+        <div>
+          <a href="{% url 'edit_order' order.orderID %}">Edit</a>
+          <br><br>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>

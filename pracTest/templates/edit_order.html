@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Order</title>
+</head>
+<body>
+  <h1>Edit Order</h1>
+  <form action="{% url 'edit_order' order.orderID %}" method="post">
+    {% csrf_token %}
+    <p>
+      <label for="shippingDate">Shipping Date:</label>
+      <input type="date" id="shippingDate" name="shippingDate" value="{{ order.shippingDate }}">
+    </p>
+    <p>
+      <label for="shipped">Shipped Status:</label>
+      <select id="shipped" name="shipped">
+        <option value="Y" {% if order.shipped == 'Y' %}selected{% endif %}>Shipped</option>
+        <option value="N" {% if order.shipped == 'N' %}selected{% endif %}>Not Shipped</option>
+      </select>
+    </p>
+    <p>
+      <input type="submit" value="Update Order">
+      <br><br>
+      <a href="{% url 'order_list' %}">Back to Order List</a>
+    </p>
+  </form>
+</body>
+</html>

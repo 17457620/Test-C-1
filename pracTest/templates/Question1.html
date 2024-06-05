@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prac Test C Question 1 Form</title>
+  <style>
+    label {
+      display: inline-block;
+      width: 150px;
+    }
+    .order-container {
+      margin-top: 20px;
+    }
+    .order {
+      border: 1px solid black;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .order > div {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Orders by Customer</h1>
+  <p>Enter a Customer ID and then select whether you want to view orders that have been shipped or not shipped:</p>
+  <form id="Q1form" action="" method="post">
+    {% csrf_token %}
+    <p>
+      <label for="custID">Customer ID:</label><input type="text" id="custID" name="customerNum">
+    </p>
+    <p><label for="shipped">Show me</label>
+      <select id="shipped" name="shipped">
+        <option value="0">--please choose--</option>
+        <option value="Y">Shipped</option>
+        <option value="N">Not-Shipped</option>
+      </select>
+      &nbsp;orders for this customer<br>
+      <input type="submit" value="Show Orders" name="submit">
+    </p>
+  </form>
+
+  {% if orders %}
+  <h2>Orders for <span style="color: red">{{ customer.firstName }} {{ customer.lastName }}</span> (Customer ID: {{ customer.customerID }})</h2>
+  <div class="order-container">
+    {% for order in orders %}
+    <div class="order">
+      <div><strong>Order ID:</strong> {{ order.orderID }}</div>
+      <div><strong>Order Date:</strong> {{ order.orderDate }}</div>
+      <div><strong>Shipped:</strong> {{ order.get_shipped_display }}</div>
+      <div><strong>Shipping Date:</strong> {{ order.shippingDate }}</div>
+      <div><strong>Staff ID:</strong> {{ order.staffID }}</div>
+    </div>
+    {% endfor %}
+  </div>
+  {% elif request.method == 'POST' %}
+  <p>No orders found for <span style="color: red">{{ customer.firstName }} {{ customer.lastName }}</span> or invalid Customer ID.</p>
+  {% endif %}
+</body>
+</html>
